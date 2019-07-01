@@ -19,13 +19,7 @@ id: 'collisions',
 type: 'circle',
 source: 'AllDC',
 paint: {
-  'circle-radius': [
-    'interpolate',
-    ['linear'],
-    ['number', ['get', 'High_Risk_']],
-    0, 20,
-    40, 60
-  ],
+  'circle-radius': 8,
   'circle-color': [
     'interpolate',
     ['linear'],
