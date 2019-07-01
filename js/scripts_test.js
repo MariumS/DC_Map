@@ -9,7 +9,7 @@ var map = new mapboxgl.Map({
   center: [-73.935242,40.730610],
   scrollWheelZoom: false,
   scrollZoom: false,
-  zoom: 7,
+  zoom: 11,
 });
 
 
@@ -29,26 +29,6 @@ map.on('load', function() {
 
 
 
-
-  map.addLayer({
-    id: 'guns_',
-    type: 'fill',
-    source: 'Tmap',
-    paint: {
-      'fill-color': [
-        // use a curve (http://bl.ocks.org/anandthakker/raw/6d0269825a7e0381cdcde13f84a0b6b0/#types-expression-curve)
-        // of type "step," which will step through each break instead of interpolating between them.
-        // Then, get the density value and use a `number` expression to return it as a number instead of a string.
-        // Each step is then a pair [{color code}, {max value for break}]
-        // Finally, add a default color code for any features that fall outside of the steps you've defined.
-        "curve",
-          ["step"], ["number", ["get", "High_Risk_"], 1], "#FFEDA0", 10, "#FED976", 20, "#FEB24C", 30, "#FD8D3C", 40, "#FC4E2A", 50, "#E31A1C", 60, "#BD0026", 70, "#000000"
-      ],
-      'fill-opacity': 0.6
-    },
-  }
-);
-
   //creating points for mass shootings to overlay on map
   map.addLayer({
     'id': 'HR-circles',
@@ -66,5 +46,26 @@ map.on('load', function() {
       'circle-opacity': 0.75,
       'circle-radius': 4
     }
-  });
+}
+      );
+
+      map.addLayer({
+        id: 'guns_',
+        type: 'fill',
+        source: 'Tmap',
+        paint: {
+          'fill-color': [
+            // use a curve (http://bl.ocks.org/anandthakker/raw/6d0269825a7e0381cdcde13f84a0b6b0/#types-expression-curve)
+            // of type "step," which will step through each break instead of interpolating between them.
+            // Then, get the density value and use a `number` expression to return it as a number instead of a string.
+            // Each step is then a pair [{color code}, {max value for break}]
+            // Finally, add a default color code for any features that fall outside of the steps you've defined.
+            "curve",
+              ["step"], ["number", ["get", "High_Risk_"], 1], "#FFEDA0", 10, "#FED976", 20, "#FEB24C", 30, "#FD8D3C", 40, "#FC4E2A", 50, "#E31A1C", 60, "#BD0026", 70, "#000000"
+          ],
+          'fill-opacity': 0.6
+        },
+      }
+    );
+
 });
