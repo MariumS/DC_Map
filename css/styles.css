@@ -1,5 +1,5 @@
 #map {
-  position: absolute;
+  //position: absolute;//
   top: 0;
   bottom: 0;
   width: 100%;
@@ -38,6 +38,7 @@ a {
 
 #session {
   margin-bottom: 20px;
+  z-index: -1;
 }
 
 .row {

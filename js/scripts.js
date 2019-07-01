@@ -11,10 +11,9 @@ var map = new mapboxgl.Map({
 
 map.on('load', function() {
 
-
   map.addSource('AllDC', {
       type: 'geojson',
-      data: './data/AllDC.geojson',
+      data: './data/cleen.geojson',
     });
 
   map.addLayer({
