@@ -9,15 +9,15 @@ var map = new mapboxgl.Map({
   zoom: 11
 });
 
-map.addSource('AllDC', {
+map.addSource('DC', {
   type: 'geojson',
   data: './data/cleen.geojson',
 });
 
 map.addLayer({
-id: 'collisions',
+id: 'DC-circles',
 type: 'circle',
-source: 'AllDC',
+source: 'DC',
 paint: {
 
   'circle-color': [
@@ -32,7 +32,7 @@ paint: {
     50, '#AA5E79'
   ],
   'circle-opacity': 0.8,
-  'circle-radius': 40
+  'circle-radius': 4
 }
 
 });
