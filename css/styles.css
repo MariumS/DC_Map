@@ -1,86 +1,51 @@
-
-html, body {
- height: 100%
-}
-
-#mapContainer {
-  height: 100%;
-  width: 100%;
-  background: lightgray;
-  margin: 0 auto;
-  display: block;
-}
-
-#sidebar {
-  width: 300px;
+#map {
   position: absolute;
   top: 0;
-  left: 0;
   bottom: 0;
-  z-index: 10;
-  padding: 15px;
+  width: 100%;
 }
 
-.info-box {
-  top: 25px;
-  left: 25px;
-  z-index: 10;
-  background-color: #c3c3c3;
-  padding: 15px;
-  border-radius: 11px;
-  box-shadow: 1px 1px 7px #525252;
-  margin-bottom:15px
+h1 {
+  font-size: 20px;
+  line-height: 30px;
 }
 
-
-h3 {
-  margin: 0 0 15px 0;
-  font-size: 1rem;
+h2 {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 10px;
 }
 
-button {
-  padding: 10px;
-  font-weight: 500;
-  border-radius: 5px;
+a {
+  text-decoration: none;
+  color: #2dc4b2;
 }
 
-.legend-color-box {
-  height: 15px;
-  width: 15px;
-  float: left;
-  margin-right: 10px;
-}
-
-.map-overlay input {
-background-color: transparent;
-display: inline-block;
-width: 100%;
-position: relative;
-margin: 0;
-cursor: ew-resize;
-}
-
-.legend {
-  top: 100px;
-  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  float: left;
-  margin-right: 10px;
-  background-color: #c3c3c3;
-  padding: 15px;
-  border-radius: 11px;
-  box-shadow: 1px 1px 7px #525252;
-  margin-bottom:15px
+#console {
+  position: absolute;
+  width: 240px;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: white;
 }
 
 
-.legend h4 {
-  margin: 0 0 10px;
+.session {
+  margin-bottom: 20px;
 }
 
-.legend div span {
-  border-radius: 50%;
+.row {
+  height: 12px;
+  width: 100%;
+}
+
+.colors {
+  background: linear-gradient(to right, #2dc4b2, #3bb3c3, #669ec4, #8b88b6, #a2719b, #aa5e79);
+  margin-bottom: 5px;
+}
+
+.label {
+  width: 15%;
   display: inline-block;
-  height: 10px;
-  margin-right: 5px;
-  width: 10px;
+  text-align: center;
 }
