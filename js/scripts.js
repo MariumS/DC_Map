@@ -26,7 +26,7 @@ map.addLayer({
       ['linear'],
       ['get', 'High_Risk_'],
       //dots get slightly darker as number killed increases
-      0, '#2DC4B2',
+      0, '#daedf4',
       10, '#3BB3C3',
       20, '#669EC4',
       30, '#8B88B6',
