@@ -15,7 +15,7 @@ map.on('load', function() {
     type: 'circle',
     source: {
       type: 'geojson',
-      data: 'data/AllDC.geojson'
+      data: './data/AllDC.geojson'
     },
     paint: {
       'circle-radius': [
