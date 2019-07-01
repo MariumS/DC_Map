@@ -38,32 +38,23 @@ map.addLayer({
     'circle-radius': 4
   }
 });
+map.on('click', 'DC', function (e) {
+new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML(e.features[0].properties.High_Risk_)
+.addTo(map);
+});
 
-map.on('click', function (e) {
-    // Use featuresAt to get features within a given radius of the click event
-    // Use layer option to avoid getting results from other layers
-    map.featuresAt(e.point, {layer: 'DC', radius: 1, includeGeometry: true}, function (err, features) {
-        if (err) throw err;
-        // if there are features within the given radius of the click event,
-        // fly to the location of the click event
-        if (features.length) {
-            // Get coordinates from the symbol and center the map on those coordinates
-            map.flyTo({center: features[0].geometry.coordinates});
-            var featureName = features[0].properties.DC_ID;
-            var tooltip = new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML('<p>' + featureName + '</p>')
-                .addTo(map);
-              }
-                 });
-             });
-             // Use the same approach as above to indicate that the symbols are clickable
-             // by changing the cursor style to 'pointer'.
-             map.on('mousemove', function (e) {
-                 map.featuresAt(e.point, {layer: 'markers', radius: 10}, function (err, features) {
-                     if (err) throw err;
-                     map.getCanvas().style.cursor = features.length ? 'pointer' : '';
-                 });
-             });
+// Change the cursor to a pointer when the mouse is over the states layer.
+map.on('mouseenter', 'DC', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'DC', function () {
+map.getCanvas().style.cursor = '';
+});
+
+
 
 });
