@@ -23,8 +23,8 @@ paint: {
     'interpolate',
     ['linear'],
     ['number', ['get', 'High_Risk_']],
-    0, 2,
-    4, 6
+    0, 20,
+    40, 60
   ],
   'circle-color': [
     'interpolate',
