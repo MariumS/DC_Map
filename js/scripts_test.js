@@ -9,7 +9,7 @@ var map = new mapboxgl.Map({
   center: [-73.935242,40.730610],
   scrollWheelZoom: false,
   scrollZoom: false,
-  zoom: 11,
+  zoom: 12,
 });
 
 
