@@ -6,66 +6,43 @@ var map = new mapboxgl.Map({
   container: 'mapContainer',
   style: 'mapbox://styles/mapbox/dark-v10',
   //florida center
-  center: [-81.7, 27.99],
+  center: [-73.935242,40.730610],
   scrollWheelZoom: false,
   scrollZoom: false,
   zoom: 5.5,
 });
 
 
-//the relevant years
-//data for 2018 is incomplete
-//data for 2013 is so patchy it is left out
-//the original data also has 1970 but all gun death counts seem to be 0
-var years = [
-  '2014',
-  '2015',
-  '2016',
-  '2017',
-  '2018',
-];
-
-
-function filterBy(year) {
-  //filtering our 2 layers by the year chosen by user through the slider
-  var filters = ['==', 'year', year];
-  map.setFilter('guns_cloro', filters);
-  map.setFilter('mass_shootings-circles', filters);
-
-  // Set the label to the year
-  document.getElementById('year').textContent = years[year];
-
-}
 
 map.on('load', function() {
   //adding source for cloropleth. gun deaths data by zipcode by year
-  map.addSource('guns_by_zip', {
+  map.addSource('Tmap', {
     type: 'geojson',
-    data: './data/simple_guns.geojson',
+    data: './data/Tmap.geojson',
   });
 
   //adding source for mass shooting points. individual gun incident data, filtered to where n_killed is greater than 4
-  map.addSource('mass_shootings', {
+  map.addSource('DC', {
     type: 'geojson',
-    data: './data/mass_shootings.geojson',
+    data: './data/DCpoints.geojson',
   });
 
   //creating cloropleth
   map.addLayer({
     id: 'guns_cloro',
     type: 'fill',
-    source: 'guns_by_zip',
+    source: 'Tmap',
     paint: {
       'fill-color': {
-        property: 'n_killed_t',
+        property: 'High_Risk_',
         //color gets more red as number killed increases
         stops: [
           [0, '#f7cdcd'],
-          [5, '#ee9f9f'],
-          [10, '#ea8888'],
-          [20, '#e15e5e'],
-          [30, '#dd4a4a'],
-          [40, '#cc0000'],
+          [10, '#ee9f9f'],
+          [20, '#ea8888'],
+          [30, '#e15e5e'],
+          [40, '#dd4a4a'],
+          [50, '#cc0000'],
         ]
       }
     }
@@ -75,12 +52,12 @@ map.on('load', function() {
   map.addLayer({
     'id': 'mass_shootings-circles',
     'type': 'circle',
-    'source': 'mass_shootings',
+    'source': 'DC',
     'paint': {
       'circle-color': [
         'interpolate',
         ['linear'],
-        ['get', 'n_killed'],
+        ['get', 'High_Risk_'],
         //dots get slightly darker as number killed increases
         1, '#1400BA',
         30, '#050201'
@@ -91,15 +68,7 @@ map.on('load', function() {
   });
 
   // Set filter to first year
-  filterBy(2014);
 
-  //getting year from slider
-  document.getElementById('slider').addEventListener('input', function(e) {
-    var year = parseInt(e.target.value, 10);
-    //filtering by year
-    filterBy(year);
-
-  });
 
   // add an empty data source, which we will use to highlight the zipcode the user is hovering over
 
@@ -133,30 +102,27 @@ map.on('load', function() {
     });
 
     // get the first feature from the array of returned features.
-    var zip = features[0];
-    console.log(zip);
+    var census = features[0];
+    console.log(census);
 
 
-    if (zip) {
+    if (census) {
       // if there's a zip under the mouse, do stuff
       map.getCanvas().style.cursor = 'pointer'; // make the cursor a pointer
       //if mass_shootings-circles
-      if (zip.layer.id === 'mass_shootings-circles') {
+      if (census.layer.id === 'mass_shootings-circles') {
         {
 
           // update the text for the mass shootings area
-          $('#n_killed_s').text(`${zip.properties.n_killed} people were killed in this mass shooting`);
-          $('#year_s').text(`on ${zip.properties.date}`);
-          $('#address_s').text(`at ${zip.properties.address}`);
+          $('#n_killed_s').text(`${census.properties.High_Risk_} people were killed in this mass shooting`);
 
           // clear the text for the zipcode area
           $('#n_killed').text(``);
-          $('#year').text(``);
-          $('#zipcode').text(``);
+
         }
 
         // set this lot's polygon feature as the data for the highlight source
-        map.getSource('highlight-feature').setData(zip.geometry);
+        map.getSource('highlight-feature').setData(census.geometry);
 
         // reset the highlight source to an empty featurecollection
 
@@ -168,15 +134,12 @@ map.on('load', function() {
       //else, zipcode layer
       else {
         //properties for zipcode layer
-        $('#n_killed').text(`${zip.properties.n_killed_t} people were killed by guns`);
-        $('#year').text(`in ${zip.properties.year}`);
-        $('#zipcode').text(`in zipcode ${zip.properties.ZCTA5CE10}`);
+        $('#n_killed').text(`${census.properties.DC_ID_Per_`} people were killed by guns`);
 
         //clear the text for mass_shootings
         $('#n_killed_s').text(``);
-        $('#year_s').text(``);
-        $('#address_s').text(``);
-      }
+
+      }}
 
     } else {
       map.getCanvas().style.cursor = 'default'; // make the cursor default
@@ -185,7 +148,5 @@ map.on('load', function() {
       map.getSource('highlight-feature').setData({
         type: 'FeatureCollection',
         features: []
-      })
-    }
-  });
-});
+      }
+      });
