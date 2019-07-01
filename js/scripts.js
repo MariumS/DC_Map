@@ -31,8 +31,8 @@ map.addLayer({
       10, '#3BB3C3',
       20, '#669EC4',
       30, '#8B88B6',
-      40, '#A2719B',
-      50, '#AA5E79'
+      50, '#A2719B',
+      80, '#780303'
     ],
     'circle-opacity': 0.75,
     'circle-radius': 4
