@@ -41,7 +41,7 @@ map.addLayer({
 map.on('click', 'DC', function (e) {
 new mapboxgl.Popup()
 .setLngLat(e.lngLat)
-.setHTML(`there have been ` + e.features[0].properties.High_Risk_ + `high risk violations at ` + e.features[0].properties.DC_ID)
+.setHTML(`there have been ` + e.features[0].properties.High_Risk_ + ` high risk violations at ` + e.features[0].properties.DC_ID)
 .addTo(map);
 });
 
