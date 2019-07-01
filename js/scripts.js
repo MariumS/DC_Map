@@ -11,9 +11,7 @@ var map = new mapboxgl.Map({
 
 map.on('load', function() {
   map.addLayer({
-    id: 'collisions
-
-    ',
+    id: 'collisions',
     type: 'circle',
     source: {
       type: 'geojson',
