@@ -29,7 +29,7 @@ map.on('load', function() {
 
   //creating cloropleth
   map.addLayer({
-    id: 'guns_cloro',
+    id: 'cloro',
     type: 'fill',
     source: 'Tmap',
     paint: {
@@ -50,7 +50,7 @@ map.on('load', function() {
 
   //creating points for mass shootings to overlay on map
   map.addLayer({
-    'id': 'mass_shootings-circles',
+    'id': 'HR-circles',
     'type': 'circle',
     'source': 'DC',
     'paint': {
