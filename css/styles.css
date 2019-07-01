@@ -31,12 +31,13 @@ a {
 
 
 .session {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  position: absolute;
 }
 
 .row {
   height: 12px;
-  width: 100%;
+  width: 12px;
 }
 
 .colors {
