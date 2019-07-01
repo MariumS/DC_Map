@@ -4,12 +4,12 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFyemlwYW45NCIsImEiOiJjanVrOTdwaDQxdG42NDRwN
 //create mapboxgl map, in the map container specified in css
 var map = new mapboxgl.Map({
   container: 'mapContainer',
-  style: 'mapbox://styles/mapbox/dark-v10',
+  style: 'mapbox://styles/mapbox/light-v10',
   //florida center
   center: [-73.935242,40.730610],
   scrollWheelZoom: false,
   scrollZoom: false,
-  zoom: 5.5,
+  zoom: 7,
 });
 
 
@@ -27,26 +27,27 @@ map.on('load', function() {
     data: './data/DCpoints.geojson',
   });
 
-  //creating cloropleth
+
+
+
   map.addLayer({
-    id: 'cloro',
+    id: 'guns_',
     type: 'fill',
     source: 'Tmap',
     paint: {
-      'fill-color': {
-        property: 'High_Risk_',
-        //color gets more red as number killed increases
-        stops: [
-          [0, '#f7cdcd'],
-          [10, '#ee9f9f'],
-          [20, '#ea8888'],
-          [30, '#e15e5e'],
-          [40, '#dd4a4a'],
-          [50, '#cc0000'],
-        ]
-      }
-    }
-  });
+      'fill-color': [
+        // use a curve (http://bl.ocks.org/anandthakker/raw/6d0269825a7e0381cdcde13f84a0b6b0/#types-expression-curve)
+        // of type "step," which will step through each break instead of interpolating between them.
+        // Then, get the density value and use a `number` expression to return it as a number instead of a string.
+        // Each step is then a pair [{color code}, {max value for break}]
+        // Finally, add a default color code for any features that fall outside of the steps you've defined.
+        "curve",
+          ["step"], ["number", ["get", "High_Risk_"], 1], "#FFEDA0", 10, "#FED976", 20, "#FEB24C", 50, "#FD8D3C", 100, "#FC4E2A", 200, "#E31A1C", 500, "#BD0026", 2000, "#000000"
+      ],
+      'fill-opacity': 0.6
+    },
+  }
+);
 
   //creating points for mass shootings to overlay on map
   map.addLayer({
