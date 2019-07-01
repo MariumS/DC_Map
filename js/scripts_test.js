@@ -61,7 +61,7 @@ map.on('load', function() {
         ['get', 'High_Risk_'],
         //dots get slightly darker as number killed increases
         1, '#1400BA',
-        30, '#050201'
+        80, '#050201'
       ],
       'circle-opacity': 0.75,
       'circle-radius': 4
