@@ -30,9 +30,11 @@ a {
 }
 
 
-.session {
+#session {
   margin-top: 20px;
   position: absolute;
+  padding: 10px 20px;
+  background-color: white;
 }
 
 .row {
