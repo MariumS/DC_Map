@@ -10,13 +10,17 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', function() {
+
+
+  map.addSource('AllDC', {
+      type: 'geojson',
+      data: './data/AllDC.geojson',
+    });
+
   map.addLayer({
     id: 'collisions',
     type: 'circle',
-    source: {
-      type: 'geojson',
-      data: './data/AllDC.geojson'
-    },
+    source: 'AllDC',
     paint: {
       'circle-radius': [
         'interpolate',
