@@ -17,9 +17,10 @@ map.addSource('DC', {
 });
 
 map.addLayer({
-  'id': 'circles',
+  'id': 'DC',
   'type': 'circle',
   'source': 'DC',
+  "interactive": true,
   'paint': {
     'circle-color': [
       'interpolate',
@@ -37,4 +38,32 @@ map.addLayer({
     'circle-radius': 4
   }
 });
+
+map.on('click', function (e) {
+    // Use featuresAt to get features within a given radius of the click event
+    // Use layer option to avoid getting results from other layers
+    map.featuresAt(e.point, {layer: 'DC', radius: 1, includeGeometry: true}, function (err, features) {
+        if (err) throw err;
+        // if there are features within the given radius of the click event,
+        // fly to the location of the click event
+        if (features.length) {
+            // Get coordinates from the symbol and center the map on those coordinates
+            map.flyTo({center: features[0].geometry.coordinates});
+            var featureName = features[0].properties.DC_ID;
+            var tooltip = new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML('<p>' + featureName + '</p>')
+                .addTo(map);
+              }
+                 });
+             });
+             // Use the same approach as above to indicate that the symbols are clickable
+             // by changing the cursor style to 'pointer'.
+             map.on('mousemove', function (e) {
+                 map.featuresAt(e.point, {layer: 'markers', radius: 10}, function (err, features) {
+                     if (err) throw err;
+                     map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+                 });
+             });
+
 });
