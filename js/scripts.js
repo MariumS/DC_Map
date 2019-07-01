@@ -19,7 +19,7 @@ id: 'collisions',
 type: 'circle',
 source: 'AllDC',
 paint: {
-  'circle-radius': 8,
+
   'circle-color': [
     'interpolate',
     ['linear'],
@@ -31,7 +31,8 @@ paint: {
     40, '#A2719B',
     50, '#AA5E79'
   ],
-  'circle-opacity': 0.8
+  'circle-opacity': 0.8,
+  'circle-radius': 40
 }
 
 });
