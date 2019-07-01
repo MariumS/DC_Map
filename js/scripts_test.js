@@ -4,8 +4,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFyemlwYW45NCIsImEiOiJjanVrOTdwaDQxdG42NDRwN
 //create mapboxgl map, in the map container specified in css
 var map = new mapboxgl.Map({
   container: 'mapContainer',
-  style: 'mapbox://styles/mapbox/light-v10',
-  //florida center
+  style: 'mapbox://styles/mapbox/streets-v11',
+  //center
   center: [-73.935242,40.730610],
   scrollWheelZoom: false,
   scrollZoom: false,
@@ -42,7 +42,7 @@ map.on('load', function() {
         // Each step is then a pair [{color code}, {max value for break}]
         // Finally, add a default color code for any features that fall outside of the steps you've defined.
         "curve",
-          ["step"], ["number", ["get", "High_Risk_"], 1], "#FFEDA0", 10, "#FED976", 20, "#FEB24C", 50, "#FD8D3C", 100, "#FC4E2A", 200, "#E31A1C", 500, "#BD0026", 2000, "#000000"
+          ["step"], ["number", ["get", "High_Risk_"], 1], "#FFEDA0", 10, "#FED976", 20, "#FEB24C", 30, "#FD8D3C", 40, "#FC4E2A", 50, "#E31A1C", 60, "#BD0026", 70, "#000000"
       ],
       'fill-opacity': 0.6
     },
