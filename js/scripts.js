@@ -32,7 +32,7 @@ paint: {
     50, '#AA5E79'
   ],
   'circle-opacity': 0.8,
-  'circle-radius': 4
+  'circle-radius': 24
 }
 
 });
