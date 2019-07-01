@@ -9,37 +9,35 @@ var map = new mapboxgl.Map({
   zoom: 11
 });
 
-map.on('load', function() {
+map.addSource('AllDC', {
+  type: 'geojson',
+  data: './data/cleen.geojson',
+});
 
-  map.addSource('AllDC', {
-      type: 'geojson',
-      data: './data/cleen.geojson',
-    });
+map.addLayer({
+id: 'collisions',
+type: 'circle',
+source: 'AllDC',
+paint: {
+  'circle-radius': [
+    'interpolate',
+    ['linear'],
+    ['number', ['get', 'High_Risk_']],
+    0, 2,
+    4, 6
+  ],
+  'circle-color': [
+    'interpolate',
+    ['linear'],
+    ['number', ['get', 'High_Risk_']],
+    0, '#2DC4B2',
+    10, '#3BB3C3',
+    20, '#669EC4',
+    30, '#8B88B6',
+    40, '#A2719B',
+    50, '#AA5E79'
+  ],
+  'circle-opacity': 0.8
+}
 
-  map.addLayer({
-    id: 'collisions',
-    type: 'circle',
-    source: 'AllDC',
-    paint: {
-      'circle-radius': [
-        'interpolate',
-        ['linear'],
-        ['number', ['get', 'High_Risk_']],
-        0, 4,
-        5, 24
-      ],
-      'circle-color': [
-        'interpolate',
-        ['linear'],
-        ['number', ['get', 'High_Risk_']],
-        0, '#2DC4B2',
-        10, '#3BB3C3',
-        20, '#669EC4',
-        30, '#8B88B6',
-        40, '#A2719B',
-        50, '#AA5E79'
-      ],
-      'circle-opacity': 0.8
-    }
-  });
 });
